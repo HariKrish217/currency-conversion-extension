@@ -48,6 +48,8 @@ Fixes common OCR issues:
 - Misread characters (`g g`, `O`, etc.)
 
 ---
+<img src="images/popup.png" width="300"> 
+---
 ### *Folder structure*
 smart-currency-ocr-extension/
 │  
