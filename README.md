@@ -78,7 +78,7 @@ Share it with friends
 Contribute ideas or improvements
 
 # *Author*
-Built by *Hari*
+Built by *Arch*
 
 
 
