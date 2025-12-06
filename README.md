@@ -48,6 +48,7 @@ Fixes common OCR issues:
 - Misread characters (`g g`, `O`, etc.)
 
 ---
+### Popup ui
 <img src="images/Screenshot 2025-12-06 122550.png" width="300"> 
 ---
 
