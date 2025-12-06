@@ -48,24 +48,26 @@ Fixes common OCR issues:
 - Misread characters (`g g`, `O`, etc.)
 
 ---
-<img src="images/popup.png" width="300"> 
+### Popup ui
+<img src="images/Screenshot 2025-12-06 122550.png" width="300"> 
 ---
-### *Folder structure*
-smart-currency-ocr-extension/
-│  
-├── manifest.json  
-├── background.js  
-├── content.js  
-├── popup.html  
-├── popup.js  
-├── styles.css  
-│  
-├── icons/  
-│   ├── icon16.png  
-│   ├── icon32.png  
-│   ├── icon48.png  
-│   └── icon128.png  
 
+### *Folder structure*
+smart-currency-ocr-extension/ 
+│   
+├── manifest.json    
+├── background.js    
+├── content.js    
+├── popup.html    
+├── popup.js    
+├── styles.css    
+│    
+├── icons/    
+│   ├── icon16.png    
+│   ├── icon32.png    
+│   ├── icon48.png    
+│   └── icon128.png    
+  
 ---
 
 ### *Support the Project*
