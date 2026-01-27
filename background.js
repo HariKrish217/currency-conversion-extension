@@ -1,3 +1,8 @@
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("Service worker installed/updated");
+});
+
+
 // ---------------------------------------------------
 // CLEAN OCR NOISE
 function cleanOCRText(text) {
@@ -126,6 +131,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
     );
     console.log(prices)
   }
+  return true;
 });
 
 //context-menus
@@ -135,6 +141,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: "Extract Text (Tesseract OCR)",
     contexts: ["image"]
   });
+  return true;
 });
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "tesseract-ocr") {
@@ -143,6 +150,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       imageUrl: info.srcUrl
     });
   }
+  return true;
 });
 
 
