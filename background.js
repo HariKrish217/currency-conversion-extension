@@ -59,16 +59,57 @@ function parseCurrency(text) {
     amount
   };
 }
+// ---------------------------------------------------
+//Caching
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
+async function getRates(from) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(from, async (cached) => {
+      const entry = cached[from];
 
+      // Use cache if valid
+      if (entry && Date.now() - entry.timestamp < CACHE_TTL) {
+        return resolve(entry.rates);
+      }
 
-// Actual API conversion
-async function getConvertedValue(amount, from, to) {
-  const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
-  const data = await res.json();
-  return amount * data.rates[to];
+      try {
+        const res = await fetch(
+          `https://api.exchangerate-api.com/v4/latest/${from}`
+        );
+        if (!res.ok) throw new Error("API failed");
+
+        const data = await res.json();
+
+        // Save to cache
+        chrome.storage.local.set({
+          [from]: {
+            timestamp: Date.now(),
+            rates: data.rates
+          }
+        });
+
+        resolve(data.rates);
+      } 
+      catch (err) {
+        reject(err);
+      }
+    });
+  });
 }
 
+//-------------------------------------------------------
+// Actual API conversion
+async function getConvertedValue(amount, from, to) {
+  const rates = await getRates(from);
+
+  if (!rates[to]) {
+    throw new Error("Invalid target currency");
+  }
+
+  return amount * rates[to];
+}
+//-------------------------------------------------------
 // Main listener
 chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
   if (msg.type === "TEXT_SELECTED") {
